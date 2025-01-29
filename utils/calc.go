@@ -1,12 +1,18 @@
 // ============================================================================
 // = calc.go
-// = 	Description: various calculation functions (say, multiples)
-// = 	Date: December 16, 2021
+// = 	Description		various calculation functions (say, multiples)
+// = 	Date			December 16, 2021
 // ============================================================================
 
 package utils
 
-import "strconv"
+import (
+	"math"
+	"math/big"
+	"strconv"
+
+	gb "github.com/jtpeller/gobig"
+)
 
 // separates a number into its digits
 func Digits(num string) []int64 {
@@ -19,6 +25,22 @@ func Digits(num string) []int64 {
 	return a
 }
 
+// computes the divisors of the provided number
+func Divisors(num int64) []int64 {
+	div := make([]int64, 0)
+	sqrt_num := int64(math.Sqrt(float64(num)))
+	for i := int64(1); i <= sqrt_num; i++ {
+		if num % i == 0 {
+			// if this is a sqrt, only append i
+			if (num / i == i) {
+				div = append(div, i)
+			} else {
+				div = append(div, i, num/i)
+			}
+		}
+	}
+	return div
+}
 
 // computes the fibonacci numbers
 func Fibonacci(count int64) []int64 {
@@ -100,4 +122,19 @@ func Sum(a []int64) int64 {
 		sum += a[i]
 	}
 	return sum
+}
+
+// computes Sum(), except with *big.Int
+func SumBig(a []*big.Int) *big.Int {
+	sum := gb.New(0)
+	for i := 0; i < len(a); i++ {
+		sum.Add(sum, a[i])
+	}
+	return sum
+}
+
+// calculates triangle number
+func Triangle(a int64) int64 {
+	// there is a formula to compute in O(1) time
+	return a*(a+1)/2
 }

@@ -1,7 +1,7 @@
 // ============================================================================
-// = main.go																  =
-// = 	Description: The file from which to run any of the sequences		  =
-// = 	Date: October 08, 2021												  =
+// = main.go
+// = 	Description		The file from which to run any of the solutions
+// = 	Date			October 08, 2021
 // ============================================================================
 
 package main
@@ -20,8 +20,8 @@ import (
 
 func main() {
 	// program initialization (flags)
-	probid := flag.Int("p", 0, "Which sequence to run. Example: -seq A000042")
-	comptime := flag.Bool("t", false, "True if you want approximate time-of-computation information printed. False otherwise")
+	probid := flag.Int("p", 0, "Which sequence to run. Example: -p 10")
+	comptime := flag.Bool("t", true, "Enables approximate time-of-computation")
 	
 	flag.Parse()		// remember to parse!
 
@@ -74,4 +74,7 @@ var StubStorage = map[int]interface{}{
 	8: prob.P8,
 	9: prob.P9,
 	10: prob.P10,
+	11: prob.P11,
+	12: prob.P12,
+	13: prob.P13,
 }

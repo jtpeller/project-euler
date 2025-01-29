@@ -1,5 +1,5 @@
-# project euler
+# Project Euler
 
 ## What
 
-Problems from the [project euler site](https://projecteuler.net/). Anything after problem 100 cannot be published (or the account gets locked)
+Problems from the [project euler site](https://projecteuler.net/). Aiming to complete the first 100 problems at a minimum.

@@ -104,3 +104,9 @@ func PrintWarning(msg string) {
 func PrintError(msg string) {
 	fmt.Println(red + msg + reset)
 }
+
+func PrintGrid(grid [][]int64) {
+	for i := range grid {
+		fmt.Println(grid[i])
+	}
+}
