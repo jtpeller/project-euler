@@ -1,2 +1,5 @@
+github.com/jtpeller/gobig v1.0.0/go.mod h1:fTnqaGWE90tMjP0iPBSavA1aY46X30vci8PO4/ICe8Q=
 github.com/jtpeller/gobig v1.0.1 h1:qu4Atvc55w66SWOaqK0kszGRBWp7W/N1Z3V4LGrYAqI=
 github.com/jtpeller/gobig v1.0.1/go.mod h1:fTnqaGWE90tMjP0iPBSavA1aY46X30vci8PO4/ICe8Q=
+github.com/jtpeller/num2words v1.0.6 h1:ziEuBlvpVndm5jijMGyEGtMDait1LMVqn3Ii6M3BhQ0=
+github.com/jtpeller/num2words v1.0.6/go.mod h1:J4bESHax6gPWbKRERJYyLGrx1WTrR8s5FLqEZjoNAAY=

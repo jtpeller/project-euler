@@ -55,6 +55,7 @@ func handler(name int, params ...interface{}) (interface{}) {
 // https://medium.com/@vicky.kurniawan/go-call-a-function-from-string-name-30b41dcb9e12
 func call(name int, params ...interface{}) (result interface{}, err error) {
 	f := reflect.ValueOf(StubStorage[name])
+	_ = params		// quiet warnings
 
 	// build result interface
 	var res []reflect.Value = f.Call(nil)
@@ -77,4 +78,8 @@ var StubStorage = map[int]interface{}{
 	11: prob.P11,
 	12: prob.P12,
 	13: prob.P13,
+	14: prob.P14,
+	15: prob.P15,
+	16: prob.P16,
+	17: prob.P17,
 }

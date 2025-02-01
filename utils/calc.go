@@ -14,13 +14,33 @@ import (
 	gb "github.com/jtpeller/gobig"
 )
 
+// computs C(n, k)
+func C(n, k int64) int64 {
+	if n < 0 || k < 0 {
+		PrintError("cannot be negative")
+	} else if n < k {
+		PrintError("n cannot be less than k")
+	}
+
+	// shortcut for speed
+	if k > n/2 {
+		k = n - k
+	}
+
+	c := int64(1)
+	for i := int64(1); i <= k; i++ {
+		c = (n - k + i) * c / i
+	}
+	return c
+}
+
 // separates a number into its digits
 func Digits(num string) []int64 {
-	a := make([]int64, 0)
 	ndigits := len(num)
-	for i := 1; i < ndigits; i++ {
+	a := make([]int64, ndigits)
+	for i := 0; i < ndigits; i++ {
 		d, _ := strconv.ParseInt(string(num[i]), 10, 64)
-		a = append(a, d)
+		a[i] = d
 	}
 	return a
 }
@@ -42,6 +62,14 @@ func Divisors(num int64) []int64 {
 	return div
 }
 
+func Factorial(num int64) int64 {
+	prod := int64(1)
+	for i := int64(2); i <= num; i++ {
+		prod *= i
+	}
+	return prod
+}
+
 // computes the fibonacci numbers
 func Fibonacci(count int64) []int64 {
 	a := make([]int64, count)
@@ -51,6 +79,19 @@ func Fibonacci(count int64) []int64 {
 		a[i] = a[i-1] + a[i-2]
 	}
 	return a
+}
+
+// computes max of array
+func Max(a []int64) (int64, int) {
+	max := int64(-1 << 63)
+	maxidx := 0
+	for idx, num := range a {
+		if (max < num) {
+			max = num
+			maxidx = idx
+		}
+	}
+	return max, maxidx
 }
 
 // Calculates the prime factorization of num
