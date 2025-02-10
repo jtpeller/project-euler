@@ -12,6 +12,7 @@ import (
 	"project-euler/utils"
 	"strconv"
 	"strings"
+	"time"
 
 	n2w "github.com/jtpeller/num2words"
 )
@@ -353,7 +354,7 @@ func P13() int64 {
 	// convert to big int array
 	arr := utils.CreateSlice(size)
 	for i := int64(0); i < size; i++ {
-		arr[i] = istr(strs[i], 10)
+		arr[i], _ = zero().SetString(strs[i], 10)
 	}
 
 	// sum
@@ -440,4 +441,72 @@ func P17() int64 {
 		sum += int64(len(no_hyphen))
 	}
 	return sum
+}
+
+/**
+ * P18() - Find the maximum total from top to bottom of the triangle
+ *  Date	2025.02.09
+ */
+func P18() int64 {
+	raw := "75\n95 64\n17 47 82\n18 35 87 10\n20 04 82 47 65\n19 01 23 75 03 34\n88 02 77 73 07 63 67\n99 65 04 28 06 16 70 92\n41 41 26 56 83 40 80 70 33\n41 48 72 33 47 32 37 16 94 29\n53 71 44 65 25 43 91 52 97 51 14\n70 11 33 28 77 73 17 78 39 68 17 57\n91 71 52 38 17 14 91 43 58 50 27 29 48\n63 66 04 68 89 53 67 30 73 16 69 87 40 31\n04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"
+
+	// first, create the triangle (just a slice of slices)
+	rows := strings.Split(raw, "\n")
+
+	// create the triangle "grid"
+	grid := make([][]int64, len(rows))
+	for i := range grid {
+		grid[i] = make([]int64, i+1)
+	}
+
+	// extract values from strings
+	for i, str := range rows {
+		rowvals := strings.Split(str, " ")
+		for j, v := range rowvals {
+			val, _ := strconv.ParseInt(v, 10, 64)
+			grid[i][j] = val
+		}
+	}
+	
+	// now, compute the paths. This is a connected tree, not a binary tree!
+	for i := len(grid) - 2; i >= 0; i-- {
+		row := grid[i]		// which row is being worked on
+		for j := 0; j < len(row); j++ {
+			left := float64(grid[i+1][j])
+			right := float64(grid[i+1][j+1])
+			row[j] += int64(math.Max(left, right))
+		}
+	}
+
+	return grid[0][0]		// return the root!
+}
+
+/**
+ * P19() - How many Sundays fell on the first of the month 
+ *		during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+ *	Date	2025.02.09
+ */
+func P19() int64 {
+	sum := int64(0)
+	for y := 0; y < 100; y++ {
+		for m := 1; m <= 12; m++ {
+			t := time.Date(1901+y, time.Month(m), 1, 0, 0, 0, 0, time.UTC)
+
+			if t.Weekday() == 0 {	// 0 is Sunday
+				sum++
+			}
+		}
+	}
+	return sum
+}
+
+/**
+ * P20() Factorial Digit Sum
+ * 	Find the sum of the digits in the number 100!.
+ * Date		2025.02.09
+ */
+func P20() int64 {
+	num := fact(inew(100))
+	dig := utils.Digits(num.String())
+	return utils.Sum(dig)
 }

@@ -82,4 +82,7 @@ var StubStorage = map[int]interface{}{
 	15: prob.P15,
 	16: prob.P16,
 	17: prob.P17,
+	18: prob.P18,
+	19: prob.P19,
+	20: prob.P20,
 }
