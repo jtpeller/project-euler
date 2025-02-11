@@ -50,9 +50,9 @@ func Divisors(num int64) []int64 {
 	div := make([]int64, 0)
 	sqrt_num := int64(math.Sqrt(float64(num)))
 	for i := int64(1); i <= sqrt_num; i++ {
-		if num % i == 0 {
+		if num%i == 0 {
 			// if this is a sqrt, only append i
-			if (num / i == i) {
+			if num/i == i {
 				div = append(div, i)
 			} else {
 				div = append(div, i, num/i)
@@ -86,7 +86,7 @@ func Max(a []int64) (int64, int) {
 	max := int64(-1 << 63)
 	maxidx := 0
 	for idx, num := range a {
-		if (max < num) {
+		if max < num {
 			max = num
 			maxidx = idx
 		}
@@ -100,15 +100,15 @@ func PrimeFactorization(num int64) []int64 {
 	primefact := make([]int64, 0)
 
 	// the number of 2s
-	for num % 2 == 0 {
+	for num%2 == 0 {
 		primefact = append(primefact, 2)
 		num /= 2
 	}
 
 	// num is now odd. check 3s and beyond
-	for i := int64(3); i * i <= num; i += 2 {
+	for i := int64(3); i*i <= num; i += 2 {
 		// get factors until n is zero
-		for num % i == 0 {
+		for num%i == 0 {
 			primefact = append(primefact, i)
 			num /= i
 		}
@@ -177,5 +177,5 @@ func SumBig(a []*big.Int) *big.Int {
 // calculates triangle number
 func Triangle(a int64) int64 {
 	// there is a formula to compute in O(1) time
-	return a*(a+1)/2
+	return a * (a + 1) / 2
 }

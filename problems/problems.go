@@ -25,7 +25,7 @@ import (
 func P1() int64 {
 	m := make([]int64, 0)
 	for i := int64(0); i < 1000; i++ {
-		if i % 3 == 0 || i % 5 == 0 {
+		if i%3 == 0 || i%5 == 0 {
 			m = append(m, i)
 		}
 	}
@@ -35,8 +35,8 @@ func P1() int64 {
 
 /**
  * P2() - Even Fibonacci Numbers
- *  By considering the terms in the Fibonacci sequence whose values 
- * 		do not exceed four million, find the sum of the even-valued 
+ *  By considering the terms in the Fibonacci sequence whose values
+ * 		do not exceed four million, find the sum of the even-valued
  *		terms.
  *	Date	2021.01.20
  */
@@ -44,7 +44,7 @@ func P2() int64 {
 	F := utils.Fibonacci(35)
 	sum := int64(0)
 	for _, f := range F {
-		if f % 2 == 0 && f < 4e6 {
+		if f%2 == 0 && f < 4e6 {
 			sum += f
 		}
 	}
@@ -64,7 +64,7 @@ func P3() int64 {
 
 /**
  * P4() - Largest Palindrome Product
- *  Find the largest palindrome made from the product of two 3-digit 
+ *  Find the largest palindrome made from the product of two 3-digit
  *		numbers.
  *	Date	2021.01.21
  */
@@ -91,20 +91,20 @@ func P4() int64 {
 
 /**
  * P5() - Smallest Multiple
- *  What is the smallest positive number that is evenly divisible 
+ *  What is the smallest positive number that is evenly divisible
  *		by all of the numbers from 1 to 20?
  *	Date	2021.01.21
  */
 func P5() int64 {
 	max := int64(20)
-	num := int64(20)		// start with 20
+	num := int64(20) // start with 20
 	found := false
 	for !found {
 		for i := int64(1); i < max; i++ {
-			if num % i != 0 {
+			if num%i != 0 {
 				found = false
 				num++
-				break;
+				break
 			}
 			found = true
 		}
@@ -112,17 +112,17 @@ func P5() int64 {
 	return num
 }
 
-/** 
+/**
  * P6() - Sum Square Difference
- *  Find the difference between the sum of the squares of the first 
+ *  Find the difference between the sum of the squares of the first
  * 		one hundred natural numbers and the square of the sum.
  *	Date	2021.01.23
  */
 func P6() int64 {
 	n := int64(100)
 	nf := float64(n)
-	return int64(((math.Pow(nf, 2) * math.Pow(nf + 1.0, 2)) / 4) -		// square of the sum
-		float64(n * (n + 1) * (2*n + 1) / 6))	// sum of squares
+	return int64(((math.Pow(nf, 2) * math.Pow(nf+1.0, 2)) / 4) - // square of the sum
+		float64(n*(n+1)*(2*n+1)/6)) // sum of squares
 }
 
 /**
@@ -137,7 +137,7 @@ func P7() int64 {
 
 /**
  * P8() - Largest Product in a Series
- *  Find the thirteen adjacent digits in the 1000-digit number that 
+ *  Find the thirteen adjacent digits in the 1000-digit number that
  *		have the greatest product. What is the value of this product?
  *	Date	2021.01.24
  */
@@ -148,10 +148,10 @@ func P8() int64 {
 	ndigits := 13
 	var which []int64
 	for i := 0; i < len(p8sep)-ndigits; i++ {
-		prod := utils.Prod(p8sep[i:i+ndigits])
+		prod := utils.Prod(p8sep[i : i+ndigits])
 		if prod > mp {
 			mp = prod
-			which = p8sep[i:i+ndigits]
+			which = p8sep[i : i+ndigits]
 		}
 	}
 	fmt.Println(which)
@@ -160,7 +160,7 @@ func P8() int64 {
 
 /**
  * P9() - Special Pythagorean Triplet
- *  There exists exactly one Pythagorean triplet for which 
+ *  There exists exactly one Pythagorean triplet for which
  *		a + b + c = 1000. Find the product abc.
  *	Date	2021.01.24
  */
@@ -174,7 +174,7 @@ func P9() int64 {
 				foo := math.Sqrt(math.Pow(af, 2) + math.Pow(bf, 2))
 				if foo == math.Floor(foo) {
 					c = int64(foo)
-					if a + b + c == sum {
+					if a+b+c == sum {
 						return a, b, c
 					}
 				}
@@ -183,7 +183,7 @@ func P9() int64 {
 		return -1, -1, -1
 	}
 	a, b, c := triplet(1000)
-	return a*b*c
+	return a * b * c
 }
 
 /**
@@ -197,7 +197,7 @@ func P10() int64 {
 
 /**
  * P11() - Largest Product in a Grid
- * 	What is the greatest product of four adjacent numbers in the 
+ * 	What is the greatest product of four adjacent numbers in the
  *		same direction (up, down, left, right, or diagonally) in the
  *		20×20 grid?
  *	Date	2025.01.28
@@ -205,12 +205,12 @@ func P10() int64 {
 func P11() int64 {
 	// raw is pulled from the site, and modified for storage
 	raw := "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08\n49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00\n81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65\n52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91\n22 31 16 71 51 67 63 89 41 92 36 54 22 40 40 28 66 33 13 80\n24 47 32 60 99 03 45 02 44 75 33 53 78 36 84 20 35 17 12 50\n32 98 81 28 64 23 67 10 26 38 40 67 59 54 70 66 18 38 64 70\n67 26 20 68 02 62 12 20 95 63 94 39 63 08 40 91 66 49 94 21\n24 55 58 05 66 73 99 26 97 17 78 78 96 83 14 88 34 89 63 72\n21 36 23 09 75 00 76 44 20 45 35 14 00 61 33 97 34 31 33 95\n78 17 53 28 22 75 31 67 15 94 03 80 04 62 16 14 09 53 56 92\n16 39 05 42 96 35 31 47 55 58 88 24 00 17 54 24 36 29 85 57\n86 56 00 48 35 71 89 07 05 44 44 37 44 60 21 58 51 54 17 58\n19 80 81 68 05 94 47 69 28 73 92 13 86 52 17 77 04 89 55 40\n04 52 08 83 97 35 99 16 07 97 57 32 16 26 26 79 33 27 98 66\n88 36 68 87 57 62 20 72 03 46 33 67 46 55 12 32 63 93 53 69\n04 42 16 73 38 25 39 11 24 94 72 18 08 46 29 32 40 62 76 36\n20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16\n20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54\n01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48"
-	count := 4			// how many consecutive #s to compute the product for
+	count := 4 // how many consecutive #s to compute the product for
 
 	// first, separate by newline
 	rows := strings.Split(raw, "\n")
 	nrows := len(rows)
-	ncols := nrows			// square grid
+	ncols := nrows // square grid
 
 	// then loop through rows
 
@@ -235,7 +235,7 @@ func P11() int64 {
 	// ... left / right
 	for row := 0; row < nrows; row++ {
 		for col := 0; col < ncols-count; col++ {
-			vals := grid[row][col:col+count]
+			vals := grid[row][col : col+count]
 			prod := utils.Prod(vals)
 
 			// check if prod is bigger than max
@@ -287,7 +287,7 @@ func P11() int64 {
 	fmt.Println("Highest value from diag top left -> bottom right", product, factors)
 
 	// ... diagonals (bottom left to top right)
-	for row := nrows-1; row >= count; row-- {
+	for row := nrows - 1; row >= count; row-- {
 		for col := 0; col < ncols-count; col++ {
 			// extract vertical nums
 			vals := make([]int64, count)
@@ -341,7 +341,7 @@ func P12() int64 {
 
 /**
  *	P13() - Large Sum
- * 	 Work out the first ten digits of the sum of the following 
+ * 	 Work out the first ten digits of the sum of the following
  *		one-hundred 50-digit numbers.
  *	Date	2025.01.28
  */
@@ -371,7 +371,7 @@ func P13() int64 {
 
 /**
  * P14() - Longest Collatz Sequence
- * 	Which starting number, under one million, produces the longest 
+ * 	Which starting number, under one million, produces the longest
  *  	chain?
  *	Date	2025.02.01
  */
@@ -385,7 +385,7 @@ func P14() int64 {
 		val := n
 		chain := make([]int64, 0)
 		for val > 1 {
-			if val % 2 == 0 {
+			if val%2 == 0 {
 				val /= 2
 			} else {
 				val = (3*val + 1)
@@ -396,12 +396,12 @@ func P14() int64 {
 		// now, save the length
 		lengths = append(lengths, int64(len(chain)))
 	}
-	
+
 	// now, quickly find the max of length
 	max, idx := utils.Max(lengths)
 	fmt.Println("Max chain:", max)
 	fmt.Println("Number:", 1000000-idx)
-	return int64(1000000-idx)
+	return int64(1000000 - idx)
 }
 
 /**
@@ -410,7 +410,7 @@ func P14() int64 {
  *	Date	2025.02.01
  */
 func P15() int64 {
-	return utils.C(40,20)
+	return utils.C(40, 20)
 }
 
 /**
@@ -419,15 +419,15 @@ func P15() int64 {
  *	Date	2025.02.01
  */
 func P16() int64 {
-	num := pow(inew(2), inew(1000))			// compute 2^1000
+	num := pow(inew(2), inew(1000)) // compute 2^1000
 	fmt.Println("2^1000 =", num)
-	digits := utils.Digits(num.String())	// separate into digits
+	digits := utils.Digits(num.String()) // separate into digits
 	return utils.Sum(digits)
 }
 
 /**
  * P17() - Number Letter Counts
- *  If all the numbers from 1 to 1000 (one thousand) inclusive were 
+ *  If all the numbers from 1 to 1000 (one thousand) inclusive were
  * 		written out in words, how many letters would be used?
  *	Date	2025.02.01
  */
@@ -467,10 +467,10 @@ func P18() int64 {
 			grid[i][j] = val
 		}
 	}
-	
+
 	// now, compute the paths. This is a connected tree, not a binary tree!
 	for i := len(grid) - 2; i >= 0; i-- {
-		row := grid[i]		// which row is being worked on
+		row := grid[i] // which row is being worked on
 		for j := 0; j < len(row); j++ {
 			left := float64(grid[i+1][j])
 			right := float64(grid[i+1][j+1])
@@ -478,11 +478,11 @@ func P18() int64 {
 		}
 	}
 
-	return grid[0][0]		// return the root!
+	return grid[0][0] // return the root!
 }
 
 /**
- * P19() - How many Sundays fell on the first of the month 
+ * P19() - How many Sundays fell on the first of the month
  *		during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
  *	Date	2025.02.09
  */
@@ -492,7 +492,7 @@ func P19() int64 {
 		for m := 1; m <= 12; m++ {
 			t := time.Date(1901+y, time.Month(m), 1, 0, 0, 0, 0, time.UTC)
 
-			if t.Weekday() == 0 {	// 0 is Sunday
+			if t.Weekday() == 0 { // 0 is Sunday
 				sum++
 			}
 		}
